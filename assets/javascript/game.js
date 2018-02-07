@@ -10,7 +10,7 @@ var currentWord = "";
 
 var guessesRemaining = 0;
 
-var guessedLetters = [];
+var guessedLetters = ["d","e","f"];
 
 var correctLetters = [];
 
@@ -20,7 +20,7 @@ var wordDisplay = "";
 
 var guessedLettersDisplay = "";
 
-
+var correctGuesses = 0;
 
 
 
@@ -36,6 +36,7 @@ function restart() {
 	document.getElementById("wins").textContent = wins;
 	rand = Math.floor((possibleWords.length) * Math.random());
 	currentWord = possibleWords[rand];
+	wordDisplay = "";
 	displayUnderscores(currentWord);
 	guessesRemaining = 12;
 	document.getElementById("guessesRemaining").textContent = guessesRemaining;
@@ -43,7 +44,7 @@ function restart() {
 	guessedLettersDisplay = "";
 	document.getElementById("guessedLetters").textContent = guessedLettersDisplay;
 
-	
+	correctGuesses = 0;
 
 	return(currentWord);
 
@@ -71,6 +72,8 @@ function rightGuess(letter){
 	
 	document.getElementById("guessesRemaining").textContent = guessesRemaining;
 
+	indexes.length = 0;
+
 	return;
 }
 
@@ -83,15 +86,22 @@ function rightGuessIndex(letter){
 		}
 
 	}
+
+
 	return(indexes);
 }
 
 function displayCorrectLetter(letter){
 	var length = indexes.length;
 	var wordDisplayArray = wordDisplay.split("");
+
 	for (var i = 0; i < length; i++) {
 		wordDisplayArray[indexes[i]] = letter;
 	}
+
+	// wordDisplayArray[indexes[length - 1]] = letter;
+
+
 	wordDisplay = wordDisplayArray.join("");
 
 	document.getElementById("currentWord").textContent = wordDisplay;
@@ -126,10 +136,10 @@ function isLetter(input){
 
 function notRepeat(input){
 	if(guessedLetters.indexOf(input) !== -1){
-		return true;
+		return false;
 	}
 	else{
-		return false;
+		return true;
 	}
 }
 
@@ -149,15 +159,24 @@ document.onkeyup = function(event){
 		restart();
 	}
 
-	else if(isLetter(event.key)&&notRepeat(event.key)||isLetter(event.key)&&guessesRemaining == 12) {
+
+	else if(isLetter(event.key)&&notRepeat(event.key)) {
+		console.log("is letter and not repeat guess");
+
 		if (keyInWord(event.key)) {
+			console.log("inword");
 			rightGuess(event.key);
-			console.log("correct");
+			correctGuesses ++;
+			if (correctGuesses === currentWord.length) {
+				wins ++;
+				restart();
+			}
+			// console.log("correct");
 		}
-		else{
-			wrongGuess(event.key);
-			console.log("wrong");
-		}
+		// else{
+		// 	wrongGuess(event.key);
+		// 	console.log("wrong");
+		// }
 
 
 	}
