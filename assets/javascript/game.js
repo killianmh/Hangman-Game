@@ -167,7 +167,11 @@ function keyInWord(input){
 }
 
 
+function win(){
+	document.getElementById("currentWord").textContent = wordDisplay;
 
+	setTimeout(restart, 10000);
+}
 
 
 document.onkeyup = function(event){
@@ -183,11 +187,16 @@ document.onkeyup = function(event){
 			console.log("inword");
 			rightGuess(event.key);
 			correctGuesses ++;
-			if (correctGuesses === numLetters) {
-				wins ++;
-				
+			if (guessesRemaining == 0 && correctGuesses !== numLetters) {
 				restart();
 			}
+
+			else if (correctGuesses === numLetters) {
+				wins ++;
+				win();
+				
+			}
+			
 		}	
 
 		else{
