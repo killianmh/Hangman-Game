@@ -22,11 +22,24 @@ var guessedLettersDisplay = "";
 
 var correctGuesses = 0;
 
+var numLetters = 0;
 
 
+function nonRepeatingLetters(word){
+	// count the number of unique, non-repeating letters in word
+	var length = currentWord.length;
+	var count = length;
 
+	for (var i = 0; i < length -1; i++) {
+		for (var j = i + 1; j < length; j++) {
+			if (word[i] === word[j]) {
+				count = count -1;
+			}
+		}
+	}
 
-
+	return(count);
+}
 
 
 
@@ -41,12 +54,15 @@ function restart() {
 	guessesRemaining = 12;
 	document.getElementById("guessesRemaining").textContent = guessesRemaining;
 	guessedLetters.length = 0;
+	correctLetters.length = 0;
 	guessedLettersDisplay = "";
 	document.getElementById("guessedLetters").textContent = guessedLettersDisplay;
 
 	correctGuesses = 0;
 
-	return(currentWord);
+	numLetters = nonRepeatingLetters(currentWord);
+
+	return;
 
 }
 
@@ -98,8 +114,6 @@ function displayCorrectLetter(letter){
 	for (var i = 0; i < length; i++) {
 		wordDisplayArray[indexes[i]] = letter;
 	}
-
-	// wordDisplayArray[indexes[length - 1]] = letter;
 
 
 	wordDisplay = wordDisplayArray.join("");
@@ -154,6 +168,8 @@ function keyInWord(input){
 
 
 
+
+
 document.onkeyup = function(event){
 	if (guessesRemaining == 0) {
 		restart();
@@ -167,23 +183,30 @@ document.onkeyup = function(event){
 			console.log("inword");
 			rightGuess(event.key);
 			correctGuesses ++;
-			if (correctGuesses === currentWord.length) {
+			if (correctGuesses === numLetters) {
 				wins ++;
+				
 				restart();
 			}
-			// console.log("correct");
+		}	
+
+		else{
+			console.log("incorrect");
+			wrongGuess(event.key);
+			if (guessesRemaining == 0) {
+				losses ++;
+				restart();
+			}
 		}
-		// else{
-		// 	wrongGuess(event.key);
-		// 	console.log("wrong");
-		// }
+		
+		
 
 
 	}
 
 
 	console.log("test");
-	// rightGuess("o");
+	
 
 };
 
