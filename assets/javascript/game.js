@@ -1,6 +1,6 @@
 //Initialize global variables:
 
-var possibleWords = ["duck", "goose", "parakeet", "dog", "cat", "shirt", "adder"];
+var possibleWords = ["robot", "laser", "rocket", "spaceship", "mars", "cyborg", "computer"];
 
 var wins = 0;
 
@@ -10,7 +10,7 @@ var currentWord = "";
 
 var guessesRemaining = 0;
 
-var guessedLetters = ["d","e","f"];
+var guessedLetters = [];
 
 var correctLetters = [];
 
@@ -47,10 +47,12 @@ function restart() {
 	//update display to correct number of wins
 	
 	document.getElementById("wins").textContent = wins;
+	document.getElementById("losses").textContent = losses;
 	rand = Math.floor((possibleWords.length) * Math.random());
 	currentWord = possibleWords[rand];
 	wordDisplay = "";
 	displayUnderscores(currentWord);
+	displayHint(rand);
 	guessesRemaining = 12;
 	document.getElementById("guessesRemaining").textContent = guessesRemaining;
 	guessedLetters.length = 0;
@@ -64,6 +66,11 @@ function restart() {
 
 	return;
 
+}
+
+function displayHint(index){
+	var source = possibleWords[index].toString();
+	document.getElementById("imgHint").src = "assets/images/"+source+".jpg";
 }
 
 function displayUnderscores(string){
@@ -170,7 +177,7 @@ function keyInWord(input){
 function win(){
 	document.getElementById("currentWord").textContent = wordDisplay;
 
-	setTimeout(restart, 10000);
+	setTimeout(restart, 1000);
 }
 
 

@@ -10,4 +10,17 @@
 	width: 800px;
 	margin: 0 auto;
 	text-align: center;
+	margin-top: 400px;
+}
+
+body{
+	height: 1100px;
+	background-image: url("https://cdna.artstation.com/p/assets/images/images/001/225/672/large/ramon-schauer-06.jpg?1442525916");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+#imgHint{
+	width: 250px;
 }
