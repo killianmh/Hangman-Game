@@ -7,20 +7,64 @@
 }
 
 .center{
-	width: 800px;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
-	margin-top: 400px;
+	margin-top: 50px;
 }
 
 body{
-	height: 1100px;
-	background-image: url("https://cdna.artstation.com/p/assets/images/images/001/225/672/large/ramon-schauer-06.jpg?1442525916");
+	height: 1000px;
+	width: 100%;
+	margin: 0 auto;
+	background-image: url(../images/background.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	background-color: #282828;
+
 }
 
 #imgHint{
 	width: 250px;
+	max-height: 250px;
+}
+
+.font{
+	color: #a5a5a2;
+	font-family: 'Dhurjati', sans-serif;
+	font-size: 20px;
+}
+
+.big{
+	font-size: 24px;
+}
+
+.box{
+	background-color: #282828;
+}
+
+.huge{
+	font-size: 40px;
+}
+
+
+
+.dystopia{
+	font-family: 'Permanent Marker', cursive;
+	color: red;
+	font-size: 100px;
+	transform: rotate(-20deg);
+	position: absolute;
+	top: 50px;
+}
+
+.hangman{
+	font-family: 'Jura', sans-serif;
+	color: #f1e22e;
+	font-size: 200px;
+	font-weight: bold;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #282828;
 }

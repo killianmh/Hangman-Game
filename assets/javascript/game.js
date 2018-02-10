@@ -24,6 +24,8 @@ var correctGuesses = 0;
 
 var numLetters = 0;
 
+var oldWord = "";
+
 
 function nonRepeatingLetters(word){
 	// count the number of unique, non-repeating letters in word
@@ -48,8 +50,13 @@ function restart() {
 	
 	document.getElementById("wins").textContent = wins;
 	document.getElementById("losses").textContent = losses;
-	rand = Math.floor((possibleWords.length) * Math.random());
-	currentWord = possibleWords[rand];
+
+	do{
+		rand = Math.floor((possibleWords.length) * Math.random());
+		currentWord = possibleWords[rand];
+	}
+	while(currentWord === oldWord);
+	
 	wordDisplay = "";
 	displayUnderscores(currentWord);
 	displayHint(rand);
@@ -181,25 +188,31 @@ function win(){
 }
 
 
+
+
+
+
 document.onkeyup = function(event){
 	if (guessesRemaining == 0) {
+		oldWord = currentWord;
 		restart();
 	}
 
 
 	else if(isLetter(event.key)&&notRepeat(event.key)) {
-		console.log("is letter and not repeat guess");
 
 		if (keyInWord(event.key)) {
-			console.log("inword");
 			rightGuess(event.key);
 			correctGuesses ++;
 			if (guessesRemaining == 0 && correctGuesses !== numLetters) {
+				losses ++;
+				oldWord = currentWord;
 				restart();
 			}
 
 			else if (correctGuesses === numLetters) {
 				wins ++;
+				oldWord = currentWord;
 				win();
 				
 			}
@@ -207,10 +220,10 @@ document.onkeyup = function(event){
 		}	
 
 		else{
-			console.log("incorrect");
 			wrongGuess(event.key);
 			if (guessesRemaining == 0) {
 				losses ++;
+				oldWord = currentWord;
 				restart();
 			}
 		}
@@ -219,9 +232,6 @@ document.onkeyup = function(event){
 
 
 	}
-
-
-	console.log("test");
 	
 
 };
