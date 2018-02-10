@@ -228,7 +228,6 @@ document.onkeyup = function(event){
 			}
 		}
 		
-		
 
 
 	}
